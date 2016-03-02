@@ -1,0 +1,27 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>Päivän keskustelut</title>
+        <meta charset="utf-8" />
+    </head>
+
+    <body>
+        <h1>Viestit</h1>
+
+        <ul>
+            <li th:each="viesti: ${viestit}">
+                <span th:text="${viesti.id}">1</span> <span th:text="${viesti.kayttaja}">kayttaja</span>:&nbsp;
+                <span th:text="${viesti.sisalto}">sisalto</span>
+            </li>
+        </ul>
+        
+        <form method="POST" action="/viestit">
+            Lisää uusi viesti:<br/>
+            Viesti: <input type="text" name="sisalto"/><br/>
+            Lähettäjä: <input type="text" name="kayttaja"/><br/>
+            <input type="submit" value="Lähetä viesti"/>
+        </form>
+
+    </body>
+</html>
