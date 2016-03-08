@@ -7,21 +7,27 @@
     </head>
 
     <body>
-        <h1>Viestit</h1>
+        <h1>Viestit aiheesta:</h1>
+        
+        <h2 th:text="${keskustelu}">keskustelu</h2>
 
         <ul>
             <li th:each="viesti: ${viestit}">
-                <span th:text="${viesti.id}">1</span> <span th:text="${viesti.kayttaja}">kayttaja</span>:&nbsp;
-                <span th:text="${viesti.sisalto}">sisalto</span>
+                <span th:text="${viesti.id}">1</span> <span th:text="${viesti.lahettaja}">lahettaja</span>:&nbsp;
+                <span th:text="${viesti.aika}">aika</span>&nbsp;&nbsp;<span th:text="${viesti.sisalto}">sisalto</span>
             </li>
         </ul>
         
         <form method="POST" action="/viestit">
             Lisää uusi viesti:<br/>
             Viesti: <input type="text" name="sisalto"/><br/>
-            Lähettäjä: <input type="text" name="kayttaja"/><br/>
+            Lähettäjä: <input type="text" name="lahettaja"/><br/>
+            <input type="hidden" name="keskustelu" value="0" th:value="${keskusteluId}"/><br/>
             <input type="submit" value="Lähetä viesti"/>
         </form>
-
+        
+        <p><a th:href="@{https://enigmatic-badlands-83870/keskustelut(keskustelu=${keskusteluId})}">Takaisin keskusteluihin</a></p>
+        <!-- <p><a th:href="@{http://localhost:4567/keskustelut(keskustelu=${keskusteluId})}">Takaisin keskusteluihin</a></p>
+        -->
     </body>
 </html>

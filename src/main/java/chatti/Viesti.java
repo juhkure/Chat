@@ -1,39 +1,38 @@
 
 package chatti;
 
-import java.sql.*;
-
-
 public class Viesti {
-    
     private int id;
+    private int keskustelu;
+    private int lahettaja;
     private String sisalto;
-    private Timestamp aika;
-    private String kayttaja;
+    private String aika;
 
-    public Viesti(int id, String sisalto, Timestamp aika, String kayttaja) {
+    public Viesti(int id, int keskustelu, int lahettaja, String sisalto, String aika) {
         this.id = id;
+        this.keskustelu = keskustelu;
+        this.lahettaja = lahettaja;
         this.sisalto = sisalto;
         this.aika = aika;
-        this.kayttaja = kayttaja;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getKayttaja() {
-        return kayttaja;
+    public int getKeskustelu() {
+        return keskustelu;
     }
 
-    public Timestamp getAika() {
-        return aika;
+    public int getLahettaja() {
+        return lahettaja;
     }
 
     public String getSisalto() {
         return sisalto;
     }
-    
-    
-    
+
+    public String getAika() {
+        return aika;
+    }
 }
