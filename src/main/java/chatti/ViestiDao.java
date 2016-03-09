@@ -46,6 +46,7 @@ public class ViestiDao {
             int lahettaja = rs.getInt("lähettäjä");
             String sisalto = rs.getString("sisältö");
             String aika = rs.getString("aika");
+            aika = aika.substring(0, 16);
 
             viestit.add(new Viesti(id, keskustelu, lahettaja, sisalto, aika));
         }
