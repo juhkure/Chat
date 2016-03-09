@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
     <head>
-        <title>Päivän keskustelut</title>
+        <title>Wannabe Vauva-lehden keskustelupalsta</title>
         <meta charset="utf-8" />
     </head>
 
@@ -13,8 +13,8 @@
 
         <ul>
             <li th:each="viesti: ${viestit}">
-                <span th:text="${viesti.id}">1</span> <span th:text="${viesti.lahettaja}">lahettaja</span>:&nbsp;
-                <span th:text="${viesti.aika}">aika</span>&nbsp;&nbsp;<span th:text="${viesti.sisalto}">sisalto</span>
+                <span th:text="${viesti.aika}">aika</span>&nbsp;&nbsp;<span th:text="${viesti.nimimerkki}">lahettaja</span>:&emsp;
+                <span th:text="${viesti.sisalto}">sisalto</span>
             </li>
         </ul>
         
@@ -27,6 +27,7 @@
         </form>
         
         <p><a th:href="@{https://enigmatic-badlands-83870.herokuapp.com/keskustelut(keskustelu=${keskusteluId})}">Takaisin keskusteluihin</a></p>
+        
         <!-- <p><a th:href="@{http://localhost:4567/keskustelut(keskustelu=${keskusteluId})}">Takaisin keskusteluihin</a></p>
         -->
     </body>

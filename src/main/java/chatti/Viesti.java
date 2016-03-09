@@ -7,6 +7,7 @@ public class Viesti {
     private int lahettaja;
     private String sisalto;
     private String aika;
+    private String nimimerkki;
 
     public Viesti(int id, int keskustelu, int lahettaja, String sisalto, String aika) {
         this.id = id;
@@ -35,4 +36,12 @@ public class Viesti {
     public String getAika() {
         return aika;
     }
+
+    public String getNimimerkki() {
+        return nimimerkki;
+    }
+
+    public void setNimimerkki(String nimimerkki) {
+        this.nimimerkki = nimimerkki;
+    }  
 }

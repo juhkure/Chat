@@ -28,18 +28,27 @@ public class Main {
 
         ViestiDao viestiDao = new ViestiDao(db);
         KeskusteluDao keskusteluDao = new KeskusteluDao(db);
+        LahettajaDao lahettajaDao = new LahettajaDao(db);
 
+        // ******************
+        // VIESTIT - GET ****
         get("/viestit", (req, res) -> {
             int keskusteluId = Integer.parseInt(req.queryParams("keskustelu"));
             
             HashMap map = new HashMap<>();
             map.put("keskustelu", keskusteluDao.findAvaus(keskusteluId));
-            map.put("viestit", viestiDao.find(keskusteluId));
+            List<Viesti> viestit = viestiDao.find(keskusteluId);
+            for(Viesti viesti : viestit) {
+                viesti.setNimimerkki(lahettajaDao.haeNimimerkki(viesti.getLahettaja()));
+            }
+            map.put("viestit", viestit);
             map.put("keskusteluId", keskusteluId);
 
             return new ModelAndView(map, "index");
         }, new ThymeleafTemplateEngine());
 
+        // *******************
+        // VIESTIT - POST ****
         post("/viestit", (req, res) -> {
             String sisalto = req.queryParams("sisalto");
             String lahettaja = req.queryParams("lahettaja");
@@ -51,10 +60,11 @@ public class Main {
                     + "<a href='/viestit?keskustelu=" + keskustelu + "'>Palaa viesteihin.</a>";
         });
         
-        
+        // **********************
+        // KESKUSTELUT - GET ****
         get("/keskustelut", (req, res) -> {
             String html = "<h1>Tervetuloa chattiin!</h1>\n";
-            html += "<h2>Keskustelualueet ovat:</h2>\n";
+            html += "<h2>Keskustelujen aiheet ovat:</h2>\n";
             
             List<Keskustelu> avaukset = keskusteluDao.findAvaukset();
             

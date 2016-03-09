@@ -37,7 +37,7 @@ public class ViestiDao {
     public List<Viesti> find(int keskustelu) throws SQLException {
         Connection connection = database.getConnection();
         PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Viesti "
-                + "WHERE keskustelu = " + keskustelu + ";");
+                + "WHERE keskustelu = " + keskustelu + " ORDER BY aika;");
 
         ResultSet rs = stmt.executeQuery();
         List<Viesti> viestit = new ArrayList<>();
