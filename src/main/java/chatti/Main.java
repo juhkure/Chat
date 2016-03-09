@@ -57,7 +57,7 @@ public class Main {
             viestiDao.lisaaViesti(keskustelu, sisalto, lahettaja);
 
             return "Viestisi on nyt lisätty päivän keskusteluihin.<br/>"
-                    + "<a href='https://enigmatic-badlands-83870/viestit?keskustelu=" + keskustelu + "'>Palaa viesteihin.</a>";
+                    + "<a href='https://enigmatic-badlands-83870.herokuapp.com/viestit?keskustelu=" + keskustelu + "'>Palaa viesteihin.</a>";
             /*
             return "Viestisi on nyt lisätty päivän keskusteluihin.<br/>"
                     + "<a href='/viestit?keskustelu=" + keskustelu + "'>Palaa viesteihin.</a>";
