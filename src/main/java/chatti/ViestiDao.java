@@ -83,6 +83,7 @@ public class ViestiDao {
         stmt = connection.prepareStatement("INSERT INTO Viesti (keskustelu, lähettäjä, sisältö) VALUES\n"
                 + "('" + keskustelu + "', '" + lahettajaId + "', '" + sisalto + "');");
 
+        rs.close();
         stmt.executeUpdate();
         stmt.close();
         connection.close();
