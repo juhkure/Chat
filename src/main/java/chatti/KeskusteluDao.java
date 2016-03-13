@@ -88,14 +88,20 @@ public class KeskusteluDao {
         return lkm;
     }
 
-    public String viimeisimmanViestinPvm(int id) throws SQLException {
+    public String viimeisimmanViestinAika(int id) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT Viesti.aika FROM Viesti JOIN Keskustelu\n"
-                + "ON Viesti.keskustelu = Keskustelu.id\n"
-                + "WHERE Keskustelu.id = '" + id + "' ORDER BY Viesti.aika DESC LIMIT 1;");
-        String pvm = stmt.toString();
+        PreparedStatement stmt = connection.prepareStatement("SELECT aika FROM Viesti WHERE keskustelu = " + id + " ORDER BY aika DESC LIMIT 1;");
+        ResultSet rs = stmt.executeQuery();
+        
+        String aika = "";
+        while (rs.next()) {
+            aika = rs.getString("aika");
+        }
 
-        return pvm.substring(0, 9);
+        rs.close();
+        stmt.close();
+        connection.close();
+        return aika.substring(0, 16);
     }
     
     public int findAlue(int keskustelu)  throws SQLException {
@@ -114,6 +120,23 @@ public class KeskusteluDao {
         connection.close();
         
         return alue_id;
+    }
+    
+    public int viestienLkmKeskustelualueessa(int alue) throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("SELECT COUNT(*) AS lkm FROM Viesti JOIN Keskustelu ON Viesti.keskustelu = Keskustelu.id WHERE Keskustelu.alue_id = " + alue + ";");
+        ResultSet rs = stmt.executeQuery();
+        
+        int lkm = 0;
+        while (rs.next()) {
+            lkm = rs.getInt("lkm");
+        }
+
+        rs.close();
+        stmt.close();
+        connection.close();
+        
+        return lkm;
     }
 
 }

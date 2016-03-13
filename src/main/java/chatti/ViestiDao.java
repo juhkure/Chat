@@ -88,5 +88,22 @@ public class ViestiDao {
         stmt.close();
         connection.close();
     }
+    
+    public int viestienLkmKeskustelussa(int keskustelu) throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("SELECT COUNT(*) AS lkm FROM Viesti WHERE keskustelu = " + keskustelu + ";");
+        ResultSet rs = stmt.executeQuery();
+        
+        int lkm = 0;
+        while (rs.next()) {
+            lkm = rs.getInt("lkm");
+        }
+
+        rs.close();
+        stmt.close();
+        connection.close();
+        
+        return lkm;
+    }
 
 }

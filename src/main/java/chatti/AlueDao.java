@@ -34,13 +34,13 @@ public class AlueDao {
 
     public String findAlue(int id) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Alue "
+        PreparedStatement stmt = connection.prepareStatement("SELECT nimi FROM Alue "
                 + "WHERE id = " + id + ";");
 
         String alue = "";
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
-            alue = rs.getString("alue");
+            alue = rs.getString("nimi");
         }
 
         return alue;
@@ -55,6 +55,8 @@ public class AlueDao {
         stmt.close();
         connection.close();
     }
+    
+    
     
 
 }
