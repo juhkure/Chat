@@ -64,7 +64,7 @@ public class KeskusteluDao {
 
     public void lisaaKeskustelu(int alue, String avaus) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("INSERT INTO Keskustelu (alue, avaus) VALUES\n"
+        PreparedStatement stmt = connection.prepareStatement("INSERT INTO Keskustelu (alue_id, avaus) VALUES\n"
                 + "('" + alue + "', '" + avaus + "');");
 
         stmt.executeUpdate();
@@ -102,6 +102,22 @@ public class KeskusteluDao {
         stmt.close();
         connection.close();
         return aika.substring(0, 16);
+    }
+    
+    public int viimeisimmanViestinId() throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("SELECT id FROM Keskustelu ORDER BY id DESC LIMIT 1;");
+        ResultSet rs = stmt.executeQuery();
+        
+        int id = 1;
+        while (rs.next()) {
+            id = rs.getInt("id");
+        }
+
+        rs.close();
+        stmt.close();
+        connection.close();
+        return id;
     }
     
     public int findAlue(int keskustelu)  throws SQLException {

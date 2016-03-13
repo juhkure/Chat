@@ -20,15 +20,15 @@
         
         <form method="POST" action="/viestit">
             Lisää uusi viesti:<br/>
-            Viesti: <input type="text" name="sisalto"/><br/>
-            Lähettäjä: <input type="text" name="lahettaja"/><br/>
+            Viesti: <input type="text" name="sisalto" required="required" /><br/>
+            Lähettäjä: <input type="text" name="lahettaja" required="required" /><br/>
             <input type="hidden" name="keskustelu" value="0" th:value="${keskusteluId}"/><br/>
             <input type="submit" value="Lähetä viesti"/>
         </form>
-        
+        <!--
         <p><a th:href="@{https://enigmatic-badlands-83870.herokuapp.com/keskustelut(alue=${alue_id})}">Takaisin keskusteluihin</a></p>
-        
-        <!-- <p><a th:href="@{http://localhost:4567/keskustelut(alue=${alue_id})}">Takaisin keskusteluihin</a></p>
         -->
+        <p><a th:href="@{http://localhost:4567/keskustelut(alue=${alue_id})}">Takaisin keskusteluihin</a></p>
+        
     </body>
 </html>
